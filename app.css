@@ -49,7 +49,7 @@ body {
 #main-container {
   display: flex;
   background-color: #009688;
-  height: 100vh;
+  height: 100%;
   justify-content: center;
   flex-wrap: wrap;
 }
