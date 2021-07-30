@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Color-game</title>
+    <link rel="stylesheet" href="app.css" />
+    <script src="helpers.js" defer></script>
+    <script src="Globals.js" defer></script>
+    <script src="Model.js" defer></script>
+    <script src="View.js" defer></script>
+    <script src="Controller.js" defer></script>
+  </head>
+  <body>
+    <!--title-->
+    <div id="title-container"></div>
+    <!--btns-->
+
+    <!--main game display-->
+
+    <div id="inputContainer">
+      <div>
+        <input
+          type="text"
+          id="player-name-input"
+          name="player-name"
+          class="input"
+        />
+        <label for="name" id="name-label" class="inputLabel"
+          >Fill name above</label
+        >
+      </div>
+    </div>
+    <div id="btns-container">
+      <button id="next-round" class="button"></button>
+      <button id="back-to-start" class="button"></button>
+      <button id="start-game" class="button"></button>
+      <button id="change-mode" class="button"></button>
+    </div>
+    <div id="mode-container"></div>
+    <div id="main-container">
+      <ul id="scores">
+        <div id="tabel-header">
+          <span id="tabel-header-name"></span
+          ><span id="tabel-header-recored"></span>
+        </div>
+      </ul>
+    </div>
+    <div id="signed-player"></div>
+  </body>
+</html>
