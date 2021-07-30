@@ -6,7 +6,6 @@ class View {
       modeCon.style.display = 'flex';
       inputCon.style.display = 'block';
       input.style.display = 'block';
-      subTitleCon.innerHTML = '';
     }
     mainCon.style.display = 'none';
     input.value = '';
@@ -63,6 +62,8 @@ class View {
     mainCon.innerHTML = ``;
   }
   lost_round() {
+    subTitleCon.innerHTML = '';
+
     scoresTable.style.display = 'block';
     actionsCon.style.display = 'flex';
     inputCon.style.display = 'none';
