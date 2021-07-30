@@ -13,14 +13,11 @@
     <script src="Controller.js" defer></script>
   </head>
   <body>
-    <!--title-->
-    <div id="title-container"></div>
-    <!--btns-->
+    <div id="actions">
+      <div id="title-container"></div>
+      <div id="sub-title-container"></div>
 
-    <!--main game display-->
-
-    <div id="inputContainer">
-      <div>
+      <div id="inputContainer">
         <input
           type="text"
           id="player-name-input"
@@ -31,15 +28,13 @@
           >Fill name above</label
         >
       </div>
-    </div>
-    <div id="btns-container">
-      <button id="next-round" class="button"></button>
-      <button id="back-to-start" class="button"></button>
-      <button id="start-game" class="button"></button>
-      <button id="change-mode" class="button"></button>
-    </div>
-    <div id="mode-container"></div>
-    <div id="main-container">
+      <div id="btns-container">
+        <button id="next-round" class="button"></button>
+        <button id="back-to-start" class="button"></button>
+        <button id="start-game" class="button"></button>
+        <button id="change-mode" class="button"></button>
+      </div>
+      <div id="mode-container"></div>
       <ul id="scores">
         <div id="tabel-header">
           <span id="tabel-header-name"></span
@@ -47,6 +42,7 @@
         </div>
       </ul>
     </div>
-    <div id="signed-player"></div>
+
+    <div id="main-container"></div>
   </body>
 </html>

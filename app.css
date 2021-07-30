@@ -1,20 +1,21 @@
-
+html,
 body {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  font-family: monospace;
   margin: 0;
+  padding: 0;
+}
+body {
+  background-color: rgba(240, 239, 239, 0.781);
+  width: 100%;
   height: 100vh;
-  background-color: rgb(253, 243, 211);
 }
-
-#btns-container {
-  padding-top: 15vh;
-  padding-bottom: 5vh;
- 
+#mode-container {
+  margin: 5%;
+  display: flex;
 }
-/*start button*/
+#mode-container .answer-cube {
+  width: 10vh;
+  height: 9.5vh;
+}
 #inputContainer {
   position: relative;
   padding: 15px 0 0;
@@ -44,8 +45,63 @@ body {
   border-image: linear-gradient(to right, yellow, blue, red, green);
   border-image-slice: 15;
 }
-
-/* reset input */
+#main-container {
+  display: flex;
+  background-color: #009688;
+  height: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.section {
+  border-radius: 3vh;
+  display: flex;
+  align-self: center;
+  width: 24%;
+  margin: 1%;
+  padding: 1%;
+  height: 15%;
+  background-color: rgba(240, 255, 255, 0.26);
+  justify-content: center;
+}
+.section.solved .answer-cube {
+  display: none;
+}
+.sectionComplimant {
+  color: #fff;
+  align-self: center;
+}
+.animated {
+  animation: square-to-circle 2.5s infinite cubic-bezier(1, 0.015, 0.295, 1.225)
+    alternate-reverse;
+  align-self: center;
+  width: 11vh;
+  height: 11vh;
+}
+.answer-cube {
+  margin: auto;
+  border: none;
+  width: 100%;
+  height: 50%;
+}
+#title-container {
+  font-size: 250%;
+  background-color: azure;
+  margin: 5% 0 2% 0;
+}
+#btns-container {
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+#actions {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 80%;
+}
 
 .button {
   font-family: monospace;
@@ -93,54 +149,15 @@ body {
 .button:focus {
   outline: none;
 }
-
-/*container game name title/lvl title / startbtn*/
-#title-container {
-  font-size: 1.5rem;
-  position: absolute;
-  border-radius: 1%;
-  background-color: azure;
+#btns-container {
+  padding: 5vh;
 }
-#signed-player{
-  font-size: 0.5rem;
-  position: absolute;
-  bottom:    0;
-}
-/* main game display container */
-#main-container {
-  border-radius: 1%;
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: space-between;
-  padding-top:14vh;
-  width: 90%;
-  height: 100%;
-  
-}
-/* main game entitys created by DOM (sections) */
-.section {
-  display: flex;
- margin :5%;
- margin-top: 0.5%;
- margin-bottom: 0%;
-  flex-direction: row;
-  align-items: center;
-  width: 19vh;
-  height: 19vh;
-}
-.animated {
-  animation: square-to-circle 2.5s infinite cubic-bezier(1, 0.015, 0.295, 1.225)
-    alternate-reverse;
-}
-.answer-cube {
-  border: none;
-  border-radius: 100%;
-  margin: 1%;
-  width: 4vh;
-  height: 3.6vh;
+#btns-container button {
+  margin: 1vh;
 }
 
 #scores {
+  display: none;
   background-color: skyblue;
   width: 85%;
   margin: auto;
@@ -178,22 +195,7 @@ body {
   font-weight: bold;
   font-size: 2rem;
 }
-#change-mode {
-  margin-top: 2%;
-}
-#mode-container{
- display: flex;
-}
-#mode-container .answer-cube{
-  width: 10vh;
-  height: 9.5vh;
-}
-#btns-container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: fit-content;
-}
+
 @keyframes square-to-circle {
   0% {
     border-radius: 0 0 0 0;
@@ -217,34 +219,39 @@ body {
   }
 }
 @media only screen and (max-width: 600px) {
+  .section {
+    width: 41%;
+    margin: 2%;
+    height: 11%;
+  }
 
-#title-container{
-  font-size: 1rem;
-}
-#main-container{
-  margin: auto;
-  padding-top: 4vh;
-}
-  .answer-cube {
-    margin: 1%;
+  .animated {
     width: 6vh;
-    height: 3.6vh;
+    height: 6vh;
   }
-  .section{
-    width: 18.5vh;
-    height: 5.5vh;
- 
- 
+  .answer-cube {
+    width: 100%;
+    height: 50%;
   }
-  .animated{
-    margin-left: 4.2vh;
-    margin-right: 4.2vh;
-    width: 11vh;
-    height: 11vh;
+  #mode-container {
+    margin: 5%;
+  }
+  #mode-container .answer-cube {
+    width: 5vh;
+    height: 5vh;
+  }
+  #inputContainer {
+    padding: 15px 0 0;
+    margin-top: 5vh;
+    width: 80%;
+  }
+  #btns-container {
+    width: 100%;
+  }
+  .inputLabel {
+    font-size: 0.8rem;
+  }
+  #title-container {
+    font-size: 180%;
   }
 }
-
-
-
-
-/*

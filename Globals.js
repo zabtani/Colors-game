@@ -33,3 +33,5 @@ scoresTable = document.getElementById('scores');
 tabelName = document.getElementById('tabel-header-name');
 tableRecored = document.getElementById('tabel-header-recored');
 modeCon = document.getElementById('mode-container');
+actionsCon = document.getElementById('actions');
+subTitleCon = document.getElementById('sub-title-container');

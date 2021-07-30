@@ -6,6 +6,7 @@ body {
   font-family: monospace;
   margin: 0;
   height: 100vh;
+  overflow: hidden;
   background-color: rgb(253, 243, 211);
 }
 
@@ -96,14 +97,15 @@ body {
 
 /*container game name title/lvl title / startbtn*/
 #title-container {
-  font-size: 200%;
+  font-size: 1.5rem;
   position: absolute;
   border-radius: 1%;
   background-color: azure;
 }
 #signed-player{
+  font-size: 0.5rem;
   position: absolute;
-  right: 0;
+  bottom:    0;
 }
 /* main game display container */
 #main-container {
@@ -111,8 +113,7 @@ body {
   flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
-  padding-top:10vh;
-  width: 100%;
+  width: 90%;
   height: 100%;
   
 }
@@ -216,10 +217,30 @@ body {
   }
 }
 @media only screen and (max-width: 600px) {
-  #name-label {
-  }
 
+#title-container{
+  font-size: 1rem;
+}
+#main-container{
+  margin: auto;
+
+}
   .answer-cube {
+    margin: 1%;
+    width: 6vh;
+    height: 3.6vh;
+  }
+  .section{
+    width: 18.5vh;
+    height: 5.5vh;
+ 
+ 
+  }
+  .animated{
+    margin-left: 4.2vh;
+    margin-right: 4.2vh;
+    width: 11vh;
+    height: 11vh;
   }
 }
 

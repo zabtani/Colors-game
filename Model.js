@@ -1,6 +1,6 @@
 class Model {
   constructor() {
-    this.lvl = 12;
+    this.lvl = 1;
     this.playersData = SCORES || [];
     this.compliments = COMPLIMANTS;
     this.colors = COLOR_STACK_OPTIONS;
@@ -66,7 +66,6 @@ class Model {
     return this.compliments[randomInt(0, this.compliments.length - 1)];
   }
   new_round() {
-    this.set_colored_title('level ' + this.lvl);
     app.in_round(this.playerName);
     this.unsolvedItems = this.lvl;
     let roundCorrectAnswers = [];
@@ -76,7 +75,6 @@ class Model {
       console.log(this.optionalAnswers);
       let itemAnswer = answers[randomInt(0, answers.length - 1)];
       if (itemAnswer === lastAnswer) {
-        console.log('dupli');
         this.items--;
       } else {
         roundCorrectAnswers.push(itemAnswer);
@@ -87,7 +85,7 @@ class Model {
     console.log(roundCorrectAnswers);
     setTimeout(() => {
       this.build_item_options(roundCorrectAnswers);
-    }, 2500);
+    }, 5500);
   }
 
   check_item_answer(answerValue, item) {
@@ -104,6 +102,7 @@ class Model {
     this.lvl++;
     clearInterval(this.titleInterval);
     app.won(this.lvl, this.random_compliment(), this.playerName);
+    this.set_colored_title('won level ' + this.lvl);
   }
 
   wrongAnswer() {
