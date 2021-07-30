@@ -1,6 +1,6 @@
 class Model {
   constructor() {
-    this.lvl = 1;
+    this.lvl = 12;
     this.playersData = SCORES || [];
     this.compliments = COMPLIMANTS;
     this.colors = COLOR_STACK_OPTIONS;
