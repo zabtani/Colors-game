@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  background-color: #009688;
 }
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -256,5 +257,8 @@ body {
   }
   #title-container {
     font-size: 180%;
+  }
+  #main-container {
+    height: 90%;
   }
 }
