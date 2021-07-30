@@ -13,8 +13,8 @@ class View {
     backBtn.style.display = 'none';
     startBtn.style.display = 'block';
     modeBtn.style.display = 'block';
-    startBtn.textContent = 'start here';
-    modeBtn.textContent = 'change mode';
+    startBtn.textContent = 'Start here';
+    modeBtn.textContent = 'Change mode';
   }
   game_title(titleText) {
     titleCon.innerHTML = titleText;
@@ -56,14 +56,13 @@ class View {
     modeBtn.style.display = 'none';
     startBtn.style.display = 'none';
     nextBtn.style.display = 'block';
-    nextBtn.textContent = `go level ${nextLvl}`;
+    nextBtn.textContent = `Go level ${nextLvl}`;
 
     mainCon.style.display = 'none';
     mainCon.innerHTML = ``;
   }
   lost_round() {
     subTitleCon.innerHTML = '';
-
     scoresTable.style.display = 'block';
     actionsCon.style.display = 'flex';
     inputCon.style.display = 'none';
@@ -74,7 +73,7 @@ class View {
     startBtn.style.display = 'none';
     backBtn.style.display = 'block';
     nextBtn.style.display = 'none';
-    backBtn.textContent = `restart a game `;
+    backBtn.textContent = `Play again! `;
     titleCon.innerHTML = `LOST ROUND `;
     titleCon.style.color = 'red';
     mainCon.innerHTML = '';

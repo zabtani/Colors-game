@@ -1,5 +1,5 @@
 const SCORES = JSON.parse(localStorage.getItem('scores'));
-const GAME_NAME = 'Sharp And Up!';
+const GAME_NAME = 'Sharp and up!';
 const TITLE_COLORS = ['black', 'blue', 'grey', 'gold', 'purple'];
 const COLOR_STACK_OPTIONS = [
   ['black', 'blue', 'red', 'green', 'yellow'],

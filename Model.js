@@ -102,7 +102,7 @@ class Model {
     this.lvl++;
     clearInterval(this.titleInterval);
     app.won(this.lvl, this.random_compliment(), this.playerName);
-    this.set_colored_title('won level ' + this.lvl);
+    this.set_colored_title('WON LVL ' + this.lvl - 1);
   }
 
   wrongAnswer() {
