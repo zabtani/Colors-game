@@ -6,6 +6,7 @@ class View {
       modeCon.style.display = 'flex';
       inputCon.style.display = 'block';
       input.style.display = 'block';
+      subTitleCon.innerHTML = '';
     }
     mainCon.style.display = 'none';
     input.value = '';
