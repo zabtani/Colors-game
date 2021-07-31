@@ -1,4 +1,16 @@
 const SCORES = JSON.parse(localStorage.getItem('scores'));
+const DUMMY_PLAYES = [
+  { name: 'omer', score: 11 },
+  { name: 'alberto', score: 6 },
+  { name: 'nina', score: 4 },
+  { name: 'david', score: 3 },
+  { name: 'sally', score: 3 },
+  { name: 'noah', score: 2 },
+  { name: 'suzi', score: 1 },
+  { name: 'dani', score: 3 },
+  { name: 'luna', score: 2 },
+  { name: 'roger', score: 1 },
+];
 const GAME_NAME = 'SHARP AND UP!';
 const TITLE_COLORS = ['black', 'blue', 'grey', 'gold', 'purple'];
 const COLOR_STACK_OPTIONS = [

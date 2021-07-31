@@ -1,7 +1,7 @@
 class Model {
   constructor() {
     this.lvl = 1;
-    this.playersData = SCORES || [];
+    this.playersData = SCORES || DUMMY_PLAYES;
     this.compliments = COMPLIMANTS;
     this.colors = COLOR_STACK_OPTIONS;
     this.titleColors = TITLE_COLORS;
@@ -80,7 +80,7 @@ class Model {
     }
     setTimeout(() => {
       this.build_item_options(roundCorrectAnswers);
-    }, 500);
+    }, 5000);
   }
 
   check_item_answer(answerValue, item) {
@@ -102,7 +102,7 @@ class Model {
 
   wrongAnswer() {
     clearInterval(this.titleInterval);
-    this.playersData.push({ name: this.playerName, score: this.lvl });
+    this.playersData.push({ name: this.playerName, score: this.lvl - 1 });
     this.playersData = this.playersData.sort((a, b) => b.score - a.score);
     localStorage.setItem('scores', JSON.stringify(this.playersData));
 

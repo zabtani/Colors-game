@@ -15,7 +15,7 @@ class View {
   }
   //when restart after 1st use:
   restart() {
-    scoresTable.style.display = 'none';
+    scores.style.display = 'none';
     scoresTable.innerHTML = '';
     modeCon.style.display = 'flex';
     inputCon.style.display = 'block';
@@ -50,7 +50,7 @@ class View {
   //when round lost:
   lost_round() {
     subTitleCon.innerHTML = '';
-    scoresTable.style.display = 'block';
+    scores.style.display = 'block';
     actionsCon.style.display = 'flex';
     inputCon.style.display = 'none';
     tabelName.textContent = 'name';
@@ -65,7 +65,7 @@ class View {
     mainCon.innerHTML = '';
     mainCon.style.display = 'none';
     modeCon.style.display = 'none';
-    actionsCon.appendChild(scoresTable);
+    actionsCon.appendChild(scores);
   }
   animated_shape(backgroundColor) {
     let shape = document.createElement('div');
