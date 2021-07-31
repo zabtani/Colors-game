@@ -28,7 +28,6 @@ const inputValidation = (inputValue, players) => {
     emptyName: 'please enter name',
     shortName: 'name too short',
     invalidName: 'invalid name',
-    takenName: 'name is taken',
   };
 
   const allowedChars = new RegExp('[^A-Za-z0-9]');
@@ -39,10 +38,6 @@ const inputValidation = (inputValue, players) => {
     : inputValue.length < 3
     ? errors.shortName
     : 'valid';
-  for (let player of players) {
-    if (player.name === inputValue) {
-      result = errors.takenName;
-    }
-  }
+
   return result === 'valid' ? false : result;
 };

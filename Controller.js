@@ -47,8 +47,8 @@ class Controller {
   won(lvl, complimant, pName) {
     this.view.won_round(lvl, complimant, pName);
   }
-  lost(scores) {
-    this.view.lost_round(scores);
+  lost(lvl) {
+    this.view.lost_round(lvl);
   }
   hide(item) {
     this.view.hide_shape(item);

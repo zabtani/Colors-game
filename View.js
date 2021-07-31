@@ -29,6 +29,8 @@ class View {
   match_start() {
     modeCon.style.display = 'none';
     inputCon.style.display = 'none';
+    startBtn.style.display = 'none';
+    modeBtn.style.display = 'none';
   }
   //when round started:
   in_round() {
@@ -40,33 +42,28 @@ class View {
     titleCon.style.display = 'block';
     actionsCon.style.display = 'flex';
     subTitleCon.innerHTML = `${complimant},<br/> lets move on ${playerName}!`;
-    modeBtn.style.display = 'none';
-    startBtn.style.display = 'none';
     nextBtn.style.display = 'block';
     nextBtn.textContent = `Go to lvl ${nextLvl}`;
     mainCon.style.display = 'none';
     mainCon.innerHTML = ``;
   }
   //when round lost:
-  lost_round() {
+  lost_round(lvl) {
     subTitleCon.innerHTML = '';
     scores.style.display = 'block';
     actionsCon.style.display = 'flex';
     inputCon.style.display = 'none';
-    tabelName.textContent = 'name';
-    tableRecored.textContent = 'score';
     btnsCon.style.display = 'flex';
     modeBtn.style.display = 'none';
     startBtn.style.display = 'none';
     backBtn.style.display = 'block';
     nextBtn.style.display = 'none';
-    titleCon.innerHTML = `LOST ROUND `;
+    titleCon.innerHTML = `LOST ROUND ${lvl}`;
     titleCon.style.color = 'red';
     mainCon.innerHTML = '';
     mainCon.style.display = 'none';
-    modeCon.style.display = 'none';
-    actionsCon.appendChild(scores);
   }
+  //when reveal animated shape
   animated_shape(backgroundColor) {
     let shape = document.createElement('div');
     shape.classList.add('section');
@@ -76,6 +73,7 @@ class View {
     mainCon.appendChild(shape);
     animation.classList.add('animated');
   }
+  //when optipn for a colored shaped created in it
   shape_option(shapeIdx, color, event) {
     const colorBtn = document.createElement('button');
     colorBtn.classList.add('answer-cube');
@@ -83,29 +81,32 @@ class View {
     shapes[shapeIdx].appendChild(colorBtn);
     colorBtn.addEventListener('click', event);
   }
+  //when example option created
   example_shape_option(color) {
     const colorBtn = document.createElement('button');
     colorBtn.classList.add('answer-cube');
     colorBtn.style.backgroundColor = color;
     modeCon.appendChild(colorBtn);
   }
+  //when mode (examples options) is restarting
   clear_mode() {
     modeCon.innerHTML = '';
   }
+  //when animated shape gets hidden
   hide_shape(shape) {
     let currentShape = shapes[shape];
     let animation = currentShape.getElementsByClassName('animated')[0];
-    console.log(animation);
     animation.style.display = 'none';
   }
+  //when shape solved
   solve_shape(shape, com) {
     shapes[shape].classList.add('solved');
     const complimant = document.createElement('div');
     complimant.className = 'sectionComplimant';
-
     complimant.textContent = com;
     shapes[shape].appendChild(complimant);
   }
+  //when a player score is published into
   publish_player_score(player) {
     const score = document.createElement('li');
     const name = document.createElement('span');

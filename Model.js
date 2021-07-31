@@ -3,7 +3,7 @@ class Model {
     this.lvl = 1;
     this.playersData = SCORES || DUMMY_PLAYES;
     this.compliments = COMPLIMANTS;
-    this.colors = COLOR_STACK_OPTIONS;
+    this.options = COLOR_STACK_OPTIONS;
     this.titleColors = TITLE_COLORS;
     this.gameName = GAME_NAME;
     this.optionalAnswers = COLOR_STACK_OPTIONS[0];
@@ -15,14 +15,13 @@ class Model {
   change_options = () => {
     let chosen = this.optionalAnswers;
     chosen =
-      chosen === this.colors[0]
-        ? this.colors[1]
-        : chosen === this.colors[1]
-        ? this.colors[2]
-        : this.colors[2]
-        ? this.colors[0]
+      chosen === this.options[0]
+        ? this.options[1]
+        : chosen === this.options[1]
+        ? this.options[2]
+        : this.options[2]
+        ? this.options[0]
         : chosen;
-
     this.optionalAnswers = chosen;
     this.options_example();
   };
@@ -60,9 +59,7 @@ class Model {
     return this.compliments[randomInt(0, this.compliments.length - 1)];
   }
   new_round() {
-    if (this.lvl === 1) {
-      app.match_start();
-    }
+    this.lvl === 1 && app.match_start();
     app.in_round(this.playerName);
     this.unsolvedItems = this.lvl;
     let roundCorrectAnswers = [];
@@ -84,14 +81,12 @@ class Model {
   }
 
   check_item_answer(answerValue, item) {
-    answerValue === true ? this.rightAnswer(item) : this.wrongAnswer();
+    answerValue === true ? this.right_answer(item) : this.wrong_answer();
   }
-  rightAnswer(item) {
+  right_answer(item) {
     app.solve(item, this.random_compliment());
     this.unsolvedItems--;
-    if (this.unsolvedItems === 0) {
-      this.won_round();
-    }
+    this.unsolvedItems === 0 && this.won_round();
   }
   won_round() {
     this.colored_title('WON LVL ' + this.lvl);
@@ -99,20 +94,22 @@ class Model {
     clearInterval(this.titleInterval);
     app.won(this.lvl, this.random_compliment(), this.playerName);
   }
-
-  wrongAnswer() {
-    clearInterval(this.titleInterval);
+  sign_player_score() {
     this.playersData.push({ name: this.playerName, score: this.lvl - 1 });
     this.playersData = this.playersData.sort((a, b) => b.score - a.score);
     localStorage.setItem('scores', JSON.stringify(this.playersData));
-
-    this.lvl = 1;
-    this.playerName = undefined;
+  }
+  wrong_answer() {
+    clearInterval(this.titleInterval);
+    this.sign_player_score();
     for (let player of this.playersData) {
       app.player_score(player);
     }
-    app.lost(this.scores);
+    app.lost(this.lvl);
+    this.lvl = 1;
+    this.playerName = undefined;
   }
+
   build_item_options(roundCorrectAnswers) {
     for (this.item = 0; this.item < this.lvl; this.item++) {
       app.hide(this.item);
