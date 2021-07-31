@@ -1,66 +1,53 @@
 class View {
-  welcome(justLost = true) {
-    if (justLost) {
-      scoresTable.style.display = 'none';
-      scoresTable.innerHTML = '';
-      modeCon.style.display = 'flex';
-      inputCon.style.display = 'block';
-      input.style.display = 'block';
-    }
-    mainCon.style.display = 'none';
-    input.value = '';
-    nextBtn.style.display = 'none';
-    backBtn.style.display = 'none';
-    startBtn.style.display = 'block';
-    modeBtn.style.display = 'block';
-    startBtn.textContent = 'Start here';
-    modeBtn.textContent = 'Change mode';
-  }
+  //when title change:
   game_title(titleText) {
     titleCon.innerHTML = titleText;
   }
-
-  error(error) {
-    startBtn.style.border = '4px solid tomato';
-    startBtn.textContent = `${error}`;
-    startBtn.style.fontSize = '140%';
-    startBtn.style.fontWeight = 'bolder';
-    startBtn.style.textTransform = 'uppercase';
-    startBtn.style.color = 'tomato';
-
-    inputLabel.style.color = 'tomato';
+  //when input invalid:
+  validation_error(error) {
+    startBtn.textContent = error ? `${error}` : 'Start here';
+    inputLabel.className = error ? 'inputLabel err' : 'inputLabel';
+    if (error) {
+      startBtn.classList.add('err');
+    } else {
+      startBtn.classList.remove('err');
+    }
   }
-  remove_error() {
-    startBtn.style.fontWeight = '';
-    startBtn.style.textTransform = 'lowercase';
-    startBtn.style.border = 'none';
-    startBtn.textContent = `start 
-    game!`;
-    startBtn.style.fontSize = '';
-    startBtn.style.color = 'white';
-    inputLabel.style.color = 'black';
+  //when restart after 1st use:
+  restart() {
+    scoresTable.style.display = 'none';
+    scoresTable.innerHTML = '';
+    modeCon.style.display = 'flex';
+    inputCon.style.display = 'block';
+    input.style.display = 'block';
+    backBtn.style.display = 'none';
+    modeBtn.style.display = 'block';
+    startBtn.style.display = 'block';
+    input.value = '';
   }
-
+  //when match started:
+  match_start() {
+    modeCon.style.display = 'none';
+    inputCon.style.display = 'none';
+  }
+  //when round started:
   in_round() {
     actionsCon.style.display = 'none';
     mainCon.style.display = 'flex';
   }
+  //when round won:
   won_round(nextLvl, complimant, playerName) {
-    if (nextLvl === 2) {
-      modeCon.style.display = 'none';
-      inputCon.style.display = 'none';
-    }
+    titleCon.style.display = 'block';
     actionsCon.style.display = 'flex';
     subTitleCon.innerHTML = `${complimant},<br/> lets move on ${playerName}!`;
-    titleCon.style.color = 'green';
     modeBtn.style.display = 'none';
     startBtn.style.display = 'none';
     nextBtn.style.display = 'block';
-    nextBtn.textContent = `Go level ${nextLvl}`;
-
+    nextBtn.textContent = `Go to lvl ${nextLvl}`;
     mainCon.style.display = 'none';
     mainCon.innerHTML = ``;
   }
+  //when round lost:
   lost_round() {
     subTitleCon.innerHTML = '';
     scoresTable.style.display = 'block';
@@ -73,7 +60,6 @@ class View {
     startBtn.style.display = 'none';
     backBtn.style.display = 'block';
     nextBtn.style.display = 'none';
-    backBtn.textContent = `Play again! `;
     titleCon.innerHTML = `LOST ROUND `;
     titleCon.style.color = 'red';
     mainCon.innerHTML = '';
@@ -103,7 +89,7 @@ class View {
     colorBtn.style.backgroundColor = color;
     modeCon.appendChild(colorBtn);
   }
-  clear_main() {
+  clear_mode() {
     modeCon.innerHTML = '';
   }
   hide_shape(shape) {

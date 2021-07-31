@@ -3,7 +3,8 @@ class Controller {
     this.model = model;
     this.view = view;
     modeBtn.addEventListener('click', () => {
-      this.model.change_optional_colors();
+      this.view.clear_mode();
+      this.model.change_options();
     });
     startBtn.addEventListener('click', () => {
       this.model.validation(input.value, this.error_in);
@@ -12,17 +13,15 @@ class Controller {
       this.model.new_round();
     });
     backBtn.addEventListener('click', () => {
-      this.model.ini();
+      this.model.colored_title(this.model.gameName);
+      this.view.restart();
     });
   }
   ini() {
     this.model.ini();
   }
-  restart_view() {
-    this.view.clear_main();
-  }
-  initial_view() {
-    this.view.welcome();
+  match_start() {
+    this.view.match_start();
   }
   example_option(option) {
     this.view.example_shape_option(option);
@@ -30,8 +29,8 @@ class Controller {
   control_title(coloredTitle) {
     this.view.game_title(coloredTitle);
   }
-  err(error) {
-    this.view.error(error);
+  error(error) {
+    this.view.validation_error(error);
   }
   reverse_err() {
     this.view.remove_error();

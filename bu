@@ -1,250 +1,274 @@
-
-body {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  font-family: monospace;
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  background-color: rgb(253, 243, 211);
-}
-
-#btns-container {
-  padding-top: 15vh;
-  padding-bottom: 5vh;
- 
-}
-/*start button*/
-#inputContainer {
-  position: relative;
-  padding: 15px 0 0;
-  margin-top: 10vh;
-  width: 50%;
-}
-
-.input {
-  width: 100%;
-  border: 0;
-  border-bottom: 6px solid #9b9b9b;
-  outline: 0;
-  font-size: 2rem;
-  text-align: center;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-image 0.2s;
-}
-
-.inputLabel {
-  font-size: 1rem;
-  color: #9b9b9b;
-}
-
-.input:focus {
-  padding-bottom: 6px;
-  border-image: linear-gradient(to right, yellow, blue, red, green);
-  border-image-slice: 15;
-}
-
-/* reset input */
-
-.button {
-  font-family: monospace;
-  display: none;
-  padding: 0.75rem 1.25rem;
-  border: none;
-  border-radius: 10rem;
-  color: #fff;
-  font-size: 1rem;
-  letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-.button:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #0cf;
-  border-radius: 10rem;
-  z-index: -2;
-}
-.button:before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background-color: #008fb3;
-  transition: all 0.3s;
-  border-radius: 10rem;
-  z-index: -1;
-}
-.button:hover {
-  color: #fff;
-}
-.button:hover:before {
-  width: 100%;
-}
-.button:focus {
-  outline: none;
-}
-
-/*container game name title/lvl title / startbtn*/
-#title-container {
-  font-size: 1.5rem;
-  position: absolute;
-  border-radius: 1%;
-  background-color: azure;
-}
-#signed-player{
-  font-size: 0.5rem;
-  position: absolute;
-  bottom:    0;
-}
-/* main game display container */
-#main-container {
-  border-radius: 1%;
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-  height: 100%;
-  
-}
-/* main game entitys created by DOM (sections) */
-.section {
-  display: flex;
- margin :5%;
- margin-top: 0.5%;
- margin-bottom: 0%;
-  flex-direction: row;
-  align-items: center;
-  width: 19vh;
-  height: 19vh;
-}
-.animated {
-  animation: square-to-circle 2.5s infinite cubic-bezier(1, 0.015, 0.295, 1.225)
-    alternate-reverse;
-}
-.answer-cube {
-  border: none;
-  border-radius: 100%;
-  margin: 1%;
-  width: 4vh;
-  height: 3.6vh;
-}
-
-#scores {
-  background-color: skyblue;
-  width: 85%;
-  margin: auto;
-  list-style: none;
-  padding: 1rem;
-  border-radius: 15px;
-}
-#scores li {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1rem;
-  background-color: rgb(77 125 164 / 80%);
-  margin: auto;
-  padding: 0.5rem;
-}
-#scores li:nth-child(2n - 1) {
-  background-color: rgb(103 116 103 / 40%);
-}
-#scores li:nth-child(2) span {
-  font-weight: bold;
-  color: rgb(255, 224, 46);
-}
-#scores > div {
-  display: flex;
-  justify-content: space-between;
-}
-#table-header {
-  background-color: yellow;
-  margin: auto;
-}
-#tabel-header-name,
-#tabel-header-recored {
-  padding: 0.3rem;
-  background-color: #deb887c4;
-  font-weight: bold;
-  font-size: 2rem;
-}
-#change-mode {
-  margin-top: 2%;
-}
-#mode-container{
- display: flex;
-}
-#mode-container .answer-cube{
-  width: 10vh;
-  height: 9.5vh;
-}
-#btns-container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: fit-content;
-}
-@keyframes square-to-circle {
-  0% {
-    border-radius: 0 0 0 0;
-    transform: rotate(45deg);
+class Model {
+  constructor() {
+    this.lvl = 1;
+    this.playersData = SCORES || [];
+    this.compliments = COMPLIMANTS;
+    this.colors = COLOR_STACK_OPTIONS;
+    this.titleColors = TITLE_COLORS;
+    this.gameName = GAME_NAME;
+    this.optionalAnswers = COLOR_STACK_OPTIONS[0];
   }
-  25% {
-    border-radius: 50% 0 0 0;
-    transform: rotate(135deg);
+  ini() {
+    app.initial_view();
+    this.set_colored_title(this.gameName);
+    app.restart_view();
+    this.optional_colors();
   }
-  50% {
-    border-radius: 50% 50% 0 0;
-    transform: rotate(180deg);
-  }
-  75% {
-    border-radius: 50% 50% 50% 0;
-    transform: rotate(315deg);
-  }
-  100% {
-    border-radius: 50%;
-    transform: rotate(404deg);
-  }
-}
-@media only screen and (max-width: 600px) {
+  change_optional_colors = () => {
+    app.restart_view();
+    let chosen = this.optionalAnswers;
+    chosen =
+      chosen === this.colors[0]
+        ? this.colors[1]
+        : chosen === this.colors[1]
+        ? this.colors[2]
+        : this.colors[2]
+        ? this.colors[0]
+        : chosen;
 
-#title-container{
-  font-size: 1rem;
-}
-#main-container{
-  margin: auto;
+    this.optionalAnswers = chosen;
+    this.optional_colors();
+  };
+  optional_colors = () => {
+    for (this.optionalAnswer of this.optionalAnswers) {
+      app.example_option(this.optionalAnswer);
+    }
+  };
+  set_colored_title(text) {
+    clearInterval(this.titleInterval);
+    let colorTitle = () => {
+      let coloredTitle = colorString(text, this.titleColors);
+      app.control_title(coloredTitle);
+    };
+    colorTitle();
+    this.titleInterval = setInterval(() => {
+      colorTitle();
+    }, 500);
+  }
 
-}
-  .answer-cube {
-    margin: 1%;
-    width: 6vh;
-    height: 3.6vh;
+  validation(inputValue) {
+    const isError = inputValidation(inputValue, this.playersData);
+    !isError
+      ? this.validation_sucsses(inputValue)
+      : this.validation_fail(isError);
   }
-  .section{
-    width: 18.5vh;
-    height: 5.5vh;
- 
- 
+  validation_fail(error) {
+    app.err(error);
+    setTimeout(() => {
+      app.reverse_err();
+    }, 1000);
   }
-  .animated{
-    margin-left: 4.2vh;
-    margin-right: 4.2vh;
-    width: 11vh;
-    height: 11vh;
+  validation_sucsses(inputValue) {
+    this.playerName = inputValue;
+    this.new_round();
+  }
+  random_compliment() {
+    return this.compliments[randomInt(0, this.compliments.length - 1)];
+  }
+  new_round() {
+    app.in_round(this.playerName);
+    this.unsolvedItems = this.lvl;
+    let roundCorrectAnswers = [];
+    let lastAnswer;
+    for (this.items = 0; this.items < this.lvl; this.items++) {
+      let answers = this.optionalAnswers;
+      console.log(this.optionalAnswers);
+      let itemAnswer = answers[randomInt(0, answers.length - 1)];
+      if (itemAnswer === lastAnswer) {
+        this.items--;
+      } else {
+        roundCorrectAnswers.push(itemAnswer);
+        app.animate(itemAnswer);
+        lastAnswer = itemAnswer;
+      }
+    }
+    console.log(roundCorrectAnswers);
+    setTimeout(() => {
+      this.build_item_options(roundCorrectAnswers);
+    }, 5500);
+  }
+
+  check_item_answer(answerValue, item) {
+    answerValue === true ? this.rightAnswer(item) : this.wrongAnswer();
+  }
+  rightAnswer(item) {
+    app.solve(item, this.random_compliment());
+    this.unsolvedItems--;
+    if (this.unsolvedItems === 0) {
+      this.won_round();
+    }
+  }
+  won_round() {
+    this.set_colored_title('WON LVL ' + this.lvl);
+    this.lvl++;
+    clearInterval(this.titleInterval);
+    app.won(this.lvl, this.random_compliment(), this.playerName);
+  }
+
+  wrongAnswer() {
+    clearInterval(this.titleInterval);
+    this.playersData.push({ name: this.playerName, score: this.lvl });
+    localStorage.setItem('scores', JSON.stringify(this.playersData));
+
+    this.lvl = 1;
+    this.playerName = undefined;
+    for (let player of this.playersData) {
+      app.player_score(player);
+    }
+
+    app.lost(this.scores);
+  }
+  build_item_options(roundCorrectAnswers) {
+    for (this.item = 0; this.item < this.lvl; this.item++) {
+      app.hide(this.item);
+      for (this.optionalAnswer of this.optionalAnswers) {
+        const isCorrect =
+          this.optionalAnswer === roundCorrectAnswers[this.item] ? true : false;
+        app.option(
+          this.item,
+          this.optionalAnswer,
+          this.check_item_answer.bind(this, isCorrect, this.item)
+        );
+      }
+    }
   }
 }
 
 
 
+initial_view
 
-/*
+class View {
+  welcome(justLost = true) {
+    if (justLost) {
+      scoresTable.style.display = 'none';
+      scoresTable.innerHTML = '';
+      modeCon.style.display = 'flex';
+      inputCon.style.display = 'block';
+      input.style.display = 'block';
+    }
+    mainCon.style.display = 'none';
+    input.value = '';
+    nextBtn.style.display = 'none';
+    backBtn.style.display = 'none';
+    startBtn.style.display = 'block';
+    modeBtn.style.display = 'block';
+    startBtn.textContent = 'Start here';
+    modeBtn.textContent = 'Change mode';
+  }
+  game_title(titleText) {
+    titleCon.innerHTML = titleText;
+  }
+
+  error(error) {
+    startBtn.style.border = '4px solid tomato';
+    startBtn.textContent = `${error}`;
+    startBtn.style.fontSize = '140%';
+    startBtn.style.fontWeight = 'bolder';
+    startBtn.style.textTransform = 'uppercase';
+    startBtn.style.color = 'tomato';
+
+    inputLabel.style.color = 'tomato';
+  }
+  remove_error() {
+    startBtn.style.fontWeight = '';
+    startBtn.style.textTransform = 'lowercase';
+    startBtn.style.border = 'none';
+    startBtn.textContent = `start 
+    game!`;
+    startBtn.style.fontSize = '';
+    startBtn.style.color = 'white';
+    inputLabel.style.color = 'black';
+  }
+
+  in_round() {
+    actionsCon.style.display = 'none';
+    mainCon.style.display = 'flex';
+  }
+  won_round(nextLvl, complimant, playerName) {
+    if (nextLvl === 2) {
+      modeCon.style.display = 'none';
+      inputCon.style.display = 'none';
+    }
+    titleCon.style.display = 'block';
+    actionsCon.style.display = 'flex';
+    subTitleCon.innerHTML = `${complimant},<br/> lets move on ${playerName}!`;
+    //  titleCon.style.color = 'green';
+    modeBtn.style.display = 'none';
+    startBtn.style.display = 'none';
+    nextBtn.style.display = 'block';
+    nextBtn.textContent = `Go level ${nextLvl}`;
+
+    mainCon.style.display = 'none';
+    mainCon.innerHTML = ``;
+  }
+  lost_round() {
+    subTitleCon.innerHTML = '';
+    scoresTable.style.display = 'block';
+    actionsCon.style.display = 'flex';
+    inputCon.style.display = 'none';
+    tabelName.textContent = 'name';
+    tableRecored.textContent = 'score';
+    btnsCon.style.display = 'flex';
+    modeBtn.style.display = 'none';
+    startBtn.style.display = 'none';
+    backBtn.style.display = 'block';
+    nextBtn.style.display = 'none';
+    backBtn.textContent = `Play again! `;
+    titleCon.innerHTML = `LOST ROUND `;
+    titleCon.style.color = 'red';
+    mainCon.innerHTML = '';
+    mainCon.style.display = 'none';
+    modeCon.style.display = 'none';
+    actionsCon.appendChild(scoresTable);
+  }
+  animated_shape(backgroundColor) {
+    let shape = document.createElement('div');
+    shape.classList.add('section');
+    let animation = document.createElement('div');
+    animation.style.backgroundColor = backgroundColor;
+    shape.appendChild(animation);
+    mainCon.appendChild(shape);
+    animation.classList.add('animated');
+  }
+  shape_option(shapeIdx, color, event) {
+    const colorBtn = document.createElement('button');
+    colorBtn.classList.add('answer-cube');
+    colorBtn.style.backgroundColor = color;
+    shapes[shapeIdx].appendChild(colorBtn);
+    colorBtn.addEventListener('click', event);
+  }
+  example_shape_option(color) {
+    const colorBtn = document.createElement('button');
+    colorBtn.classList.add('answer-cube');
+    colorBtn.style.backgroundColor = color;
+    modeCon.appendChild(colorBtn);
+  }
+  clear_main() {
+    modeCon.innerHTML = '';
+  }
+  hide_shape(shape) {
+    let currentShape = shapes[shape];
+    let animation = currentShape.getElementsByClassName('animated')[0];
+    console.log(animation);
+    animation.style.display = 'none';
+  }
+  solve_shape(shape, com) {
+    shapes[shape].classList.add('solved');
+    const complimant = document.createElement('div');
+    complimant.className = 'sectionComplimant';
+
+    complimant.textContent = com;
+    shapes[shape].appendChild(complimant);
+  }
+  publish_player_score(player) {
+    const score = document.createElement('li');
+    const name = document.createElement('span');
+    name.innerText = player.name;
+    const recored = document.createElement('span');
+    recored.innerText = player.score;
+    score.append(name, recored);
+    scoresTable.append(score);
+  }
+}
+

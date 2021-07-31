@@ -16,19 +16,21 @@ const COMPLIMANTS = [
   'amazing!',
   'pro!',
 ];
+btnsCon = document.getElementById('btns-container');
+nextBtn = document.getElementById('next-round');
+modeBtn = document.getElementById('change-mode');
+backBtn = document.getElementById('back-to-start');
+startBtn = document.getElementById('start-game');
 shapes = document.getElementsByClassName('section');
 titleCon = document.getElementById('title-container');
 signedPlayerCon = document.getElementById('signed-player');
 mainCon = document.getElementById('main-container');
 inputCon = document.getElementById('inputContainer');
-btnsCon = document.getElementById('btns-container');
 input = document.getElementById('player-name-input');
 inputLabel = document.getElementById('name-label');
-modeBtn = document.getElementById('change-mode');
-startBtn = document.getElementById('start-game');
-backBtn = document.getElementById('back-to-start');
-nextBtn = document.getElementById('next-round');
-scoresTable = document.getElementById('scores');
+scores = document.getElementById('scores');
+
+scoresTable = document.getElementById('scores-table');
 
 tabelName = document.getElementById('tabel-header-name');
 tableRecored = document.getElementById('tabel-header-recored');

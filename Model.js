@@ -1,6 +1,6 @@
 class Model {
   constructor() {
-    this.lvl = 12;
+    this.lvl = 1;
     this.playersData = SCORES || [];
     this.compliments = COMPLIMANTS;
     this.colors = COLOR_STACK_OPTIONS;
@@ -9,13 +9,10 @@ class Model {
     this.optionalAnswers = COLOR_STACK_OPTIONS[0];
   }
   ini() {
-    app.initial_view();
-    this.set_colored_title(this.gameName);
-    app.restart_view();
-    this.optional_colors();
+    this.colored_title(this.gameName);
+    this.options_example();
   }
-  change_optional_colors = () => {
-    app.restart_view();
+  change_options = () => {
     let chosen = this.optionalAnswers;
     chosen =
       chosen === this.colors[0]
@@ -27,35 +24,32 @@ class Model {
         : chosen;
 
     this.optionalAnswers = chosen;
-    this.optional_colors();
+    this.options_example();
   };
-  optional_colors = () => {
+  options_example = () => {
     for (this.optionalAnswer of this.optionalAnswers) {
       app.example_option(this.optionalAnswer);
     }
   };
-  set_colored_title(text) {
+  colored_title(text) {
     clearInterval(this.titleInterval);
-    let colorTitle = () => {
+    let action = () => {
       let coloredTitle = colorString(text, this.titleColors);
       app.control_title(coloredTitle);
     };
-    colorTitle();
+    action();
     this.titleInterval = setInterval(() => {
-      colorTitle();
+      action();
     }, 500);
   }
-
   validation(inputValue) {
-    const isError = inputValidation(inputValue, this.playersData);
-    !isError
-      ? this.validation_sucsses(inputValue)
-      : this.validation_fail(isError);
+    const error = inputValidation(inputValue, this.playersData);
+    !error ? this.validation_sucsses(inputValue) : this.validation_fail(error);
   }
   validation_fail(error) {
-    app.err(error);
+    app.error(error);
     setTimeout(() => {
-      app.reverse_err();
+      app.error(false);
     }, 1000);
   }
   validation_sucsses(inputValue) {
@@ -66,26 +60,27 @@ class Model {
     return this.compliments[randomInt(0, this.compliments.length - 1)];
   }
   new_round() {
+    if (this.lvl === 1) {
+      app.match_start();
+    }
     app.in_round(this.playerName);
     this.unsolvedItems = this.lvl;
     let roundCorrectAnswers = [];
     let lastAnswer;
-    for (this.items = 0; this.items < this.lvl; this.items++) {
+    for (let question = 0; question < this.lvl; question++) {
       let answers = this.optionalAnswers;
-      console.log(this.optionalAnswers);
       let itemAnswer = answers[randomInt(0, answers.length - 1)];
       if (itemAnswer === lastAnswer) {
-        this.items--;
+        question--;
       } else {
         roundCorrectAnswers.push(itemAnswer);
         app.animate(itemAnswer);
         lastAnswer = itemAnswer;
       }
     }
-    console.log(roundCorrectAnswers);
     setTimeout(() => {
       this.build_item_options(roundCorrectAnswers);
-    }, 5500);
+    }, 500);
   }
 
   check_item_answer(answerValue, item) {
@@ -99,15 +94,16 @@ class Model {
     }
   }
   won_round() {
+    this.colored_title('WON LVL ' + this.lvl);
     this.lvl++;
     clearInterval(this.titleInterval);
     app.won(this.lvl, this.random_compliment(), this.playerName);
-    this.set_colored_title('WON LVL ' + this.lvl - 1);
   }
 
   wrongAnswer() {
     clearInterval(this.titleInterval);
     this.playersData.push({ name: this.playerName, score: this.lvl });
+    this.playersData = this.playersData.sort((a, b) => b.score - a.score);
     localStorage.setItem('scores', JSON.stringify(this.playersData));
 
     this.lvl = 1;
@@ -115,7 +111,6 @@ class Model {
     for (let player of this.playersData) {
       app.player_score(player);
     }
-
     app.lost(this.scores);
   }
   build_item_options(roundCorrectAnswers) {
