@@ -22,7 +22,7 @@ const colorString = (string, colors) => {
   return coloredName;
 };
 
-const inputValidation = (inputValue, players) => {
+const inputValidation = (inputValue) => {
   let result;
   const errors = {
     emptyName: 'please enter name',

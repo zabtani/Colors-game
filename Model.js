@@ -42,7 +42,7 @@ class Model {
     }, 500);
   }
   validation(inputValue) {
-    const error = inputValidation(inputValue, this.playersData);
+    const error = inputValidation(inputValue);
     !error ? this.validation_sucsses(inputValue) : this.validation_fail(error);
   }
   validation_fail(error) {
