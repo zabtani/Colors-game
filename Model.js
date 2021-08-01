@@ -89,10 +89,10 @@ class Model {
     this.unsolvedItems === 0 && this.won_round();
   }
   won_round() {
-    this.colored_title('WON LVL ' + this.lvl);
     this.lvl++;
     clearInterval(this.titleInterval);
     app.won(this.lvl, this.random_compliment(), this.playerName);
+    this.colored_title('WON LVL ' + this.lvl);
   }
   sign_player_score() {
     this.playersData.push({ name: this.playerName, score: this.lvl - 1 });
